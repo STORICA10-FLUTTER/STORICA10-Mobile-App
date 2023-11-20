@@ -43,15 +43,27 @@
 
      Dalam modul ini, pengguna akan memiliki kesempatan untuk melihat preview dan detail suatu buku. Mereka akan diberikan opsi untuk memilih antara tombol "Baca" atau "Favorit".<br><br>
 
-4. **Sumber dataset katalog buku**
-
-   - Goodreads-books (Kaggle): [https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks](https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks)<br><br>
-
-5. **Role atau peran pengguna beserta deskripsinya**
+4. **Role atau peran pengguna beserta deskripsinya**
 
    - **Pengguna Guest:**
      - Pengguna tamu hanya dapat mengakses halaman beranda dan melihat pratinjau buku.
      - Untuk menggunakan fitur-fitur lainnya, pengguna diharuskan untuk melakukan login, karena akses ke fitur tersebut memerlukan otentikasi.
    - **Pengguna Storica (Non-Guest):**
      - Pengguna Storica yang sudah masuk ke akun mereka dapat mengakses semua fitur pada modul yang tersedia.
+
+5. **Alur Integrasi Web Service untuk Aplikasi STORICA**
+
+    1. **Penentuan Kebutuhan Esensial**
+    * Di tahap awal, tim kami fokus untuk mengidentifikasi kebutuhan krusial dari web service untuk aplikasi STORICA. Kebutuhan ini meliputi proses inti seperti login dan logout pengguna, registrasi akun baru, serta pengambilan data buku, termasuk daftar buku favorit dan katalog buku secara keseluruhan. Kami memilih Django sebagai kerangka kerja web service kami karena keandalan dan fleksibilitasnya.
+    2. **Arsitektur Integrasi yang Direncanakan dengan Matang**
+    * Selanjutnya, kami merancang arsitektur integrasi yang sinergis antara aplikasi Flutter kami dan web service Django. Pendekatan ini memperhatikan berbagai aspek penting seperti manajemen sesi pengguna dan strategi penyimpanan data yang efektif, memastikan bahwa integrasi berlangsung lancar dan aman.
+    3. **Pengembangan Terpadu**
+    * Dengan lingkungan pengembangan yang sudah disiapkan, lengkap dengan semua dependensi yang diperlukan, tim kami memulai proses pembuatan kode. Kami berfokus pada pembuatan permintaan HTTP yang mencakup operasi CRUD, pengiriman header yang diperlukan (termasuk API key), serta pengiriman dan penerimaan data dalam format JSON yang efisien.
+    4. **Pengujian Komprehensif**
+    * Tahap pengujian dilakukan dengan ketelitian tinggi untuk memastikan bahwa setiap aspek integrasi beroperasi sesuai harapan. Kami memberikan perhatian khusus pada pengujian performa, terutama mengingat frekuensi tinggi pemanggilan web service dan potensi beban data yang besar, untuk memastikan stabilitas dan kecepatan respons yang optimal.
+    5. **Peluncuran dan Implementasi**
+    * Setelah serangkaian pengujian yang menyeluruh, kami siap meluncurkan integrasi ini ke dalam lingkungan produksi. Tahap ini merupakan puncak dari proses integrasi yang telah kami kerjakan, membawa aplikasi STORICA ke tingkat fungsionalitas dan efisiensi yang baru.
+
+6. **Berita acara kelompok** 
+    https://docs.google.com/spreadsheets/d/1XuODbe-lljNz-xdFanQyudAxOpNnPBLw/edit?usp=sharing&ouid=105789646608386182412&rtpof=true&sd=true
 
