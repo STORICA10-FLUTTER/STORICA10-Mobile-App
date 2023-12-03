@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:storica/screens/menu.dart';
+import 'package:storica/home/screens/menu.dart';
 
 void main() {
   runApp(const LoginApp());
