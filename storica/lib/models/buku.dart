@@ -45,6 +45,7 @@ class Fields {
   String gambar;
   DateTime tanggalTerbit;
   List<int> bukuFavorites;
+  String isiBuku;
 
   Fields({
     required this.judul,
@@ -57,6 +58,7 @@ class Fields {
     required this.gambar,
     required this.tanggalTerbit,
     required this.bukuFavorites,
+    required this.isiBuku,
   });
 
   factory Fields.fromJson(Map<String, dynamic> json) => Fields(
@@ -70,6 +72,7 @@ class Fields {
         gambar: json["gambar"],
         tanggalTerbit: DateTime.parse(json["tanggal_terbit"]),
         bukuFavorites: List<int>.from(json["buku_favorites"].map((x) => x)),
+        isiBuku: json["isi_buku"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,6 +87,7 @@ class Fields {
         "tanggal_terbit":
             "${tanggalTerbit.year.toString().padLeft(4, '0')}-${tanggalTerbit.month.toString().padLeft(2, '0')}-${tanggalTerbit.day.toString().padLeft(2, '0')}",
         "buku_favorites": List<dynamic>.from(bukuFavorites.map((x) => x)),
+        "isi_buku": isiBuku,
       };
 }
 
