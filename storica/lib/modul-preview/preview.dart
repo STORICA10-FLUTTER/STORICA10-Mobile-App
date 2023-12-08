@@ -6,14 +6,16 @@ class PreviewPage extends StatelessWidget {
   final String judul;
   final String penerbit;
   final String isiBuku;
+  final int pk;
 
   PreviewPage(
       {Key? key,
       required this.gambar,
       required this.judul,
       required this.penerbit,
-      required this.isiBuku})
+      required this.isiBuku, required this.pk})
       : super(key: key);
+      
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class PreviewPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BacaPage(isiBuku: isiBuku),
+                    builder: (context) => BacaPage(isiBuku: isiBuku, pk: pk, judul: judul),
                   ),
                 );
               },
@@ -41,6 +43,7 @@ class PreviewPage extends StatelessWidget {
             Text(judul,
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             Text(penerbit),
+            Text(pk.toString()),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {

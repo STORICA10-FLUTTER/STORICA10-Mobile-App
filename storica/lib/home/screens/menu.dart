@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:storica/models/buku.dart';
-import 'package:storica/modul-preview/screens/preview.dart';
+import 'package:storica/modul-preview/preview.dart';
 
 class HomePageBuku extends StatefulWidget {
   const HomePageBuku({Key? key}) : super(key: key);
@@ -82,6 +81,7 @@ class HomePageBukuState extends State<HomePageBuku> {
                                               .data![index].fields.penerbit,
                                           isiBuku: snapshot
                                               .data![index].fields.isiBuku,
+                                          pk: snapshot.data![index].pk,
                                         ),
                                       ),
                                     );
