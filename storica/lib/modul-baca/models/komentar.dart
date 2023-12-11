@@ -25,6 +25,12 @@ class Komentar {
         fields: Fields.fromJson(json["fields"]),
     );
 
+  get rating => null;
+
+  String get isiKomentar => isiKomentar;
+
+  DateTime get tglKomentar => tglKomentar;
+
     Map<String, dynamic> toJson() => {
         "model": model,
         "pk": pk,

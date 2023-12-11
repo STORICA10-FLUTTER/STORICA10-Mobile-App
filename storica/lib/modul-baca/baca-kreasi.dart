@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 
 // TODO: bisa ubah ke Stateful biar autorefresh commentnya (for now harus back dlu baru go in lg)
-class BacaPage extends StatelessWidget {
+class BacaPageKreasi extends StatelessWidget {
   final TextEditingController _commentController = TextEditingController();
   String _selectedRating = '1'; // Default rating
 
@@ -14,35 +14,35 @@ class BacaPage extends StatelessWidget {
   final int pk;
   final String judul;
 
-  BacaPage(
+  BacaPageKreasi(
       {Key? key, required this.isiBuku, required this.pk, required this.judul})
       : super(key: key);
 
-  Future<List<Komentar>> fetchKomentar() async {
+  Future<List<Komentar>> fetchKomentarKreasi() async {
     try {
       var url =
-          Uri.parse('http://127.0.0.1:8000/preview/baca/json-komentar/$pk/');
+          Uri.parse('http://127.0.0.1:8000/preview/baca/json-komentar-kreasi/$pk/');
       var response =
           await http.get(url, headers: {"Content-Type": "application/json"});
 
       var data = jsonDecode(utf8.decode(response.bodyBytes));
 
-      List<Komentar> listKomentar = [];
+      List<Komentar> listKomentarKreasi = [];
       for (var d in data) {
         if (d != null) {
-          listKomentar.add(Komentar.fromJson(d));
+          listKomentarKreasi.add(Komentar.fromJson(d));
         }
       }
-      return listKomentar;
+      return listKomentarKreasi;
     } catch (e) {
       print("Error occurred: $e");
       return []; // return an empty list on error
     }
   }
-  
-  Future<void> _submitComment(String isiKomentar, String rating) async {
+
+  Future<void> _submitCommentKreasi(String isiKomentar, String rating) async {
     var url = Uri.parse(
-        'http://127.0.0.1:8000/preview/baca/create-komentar-flutter/'); // Replace with your API endpoint
+        'http://127.0.0.1:8000/preview/baca/create-komentar-kreasi-flutter/'); // Replace with your API endpoint
     var response = await http.post(
       url,
       headers: {"Content-Type": "application/json"},
@@ -66,7 +66,7 @@ class BacaPage extends StatelessWidget {
         title: const Text('Baca & Komentar'),
       ),
       body: FutureBuilder(
-        future: fetchKomentar(),
+        future: fetchKomentarKreasi(),
         builder: (context, AsyncSnapshot snapshot) {
           return SingleChildScrollView(
             child: Column(
@@ -168,7 +168,7 @@ class BacaPage extends StatelessWidget {
                 const SizedBox(height: 8),
                 Center(
                   child: ElevatedButton(
-                    onPressed: () => _submitComment(
+                    onPressed: () => _submitCommentKreasi(
                         _commentController.text, _selectedRating),
                     child: const Text('Submit Comment'),
                   ),
