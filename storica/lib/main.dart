@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:storica/screens/login.dart';
+//import 'package:storica/screens/login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:storica/home/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,10 +22,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'Flutter App',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
             useMaterial3: true,
           ),
-          home: const LoginPage()),
+          home: const MyHomePage()),
     );
   }
 }
