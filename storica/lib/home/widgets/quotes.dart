@@ -29,6 +29,7 @@ class _QuoteState extends State<QuotesList> {
         list_Quotes.add(Quotes.fromJson(d));
       }
     }
+
     return list_Quotes;
   }
 

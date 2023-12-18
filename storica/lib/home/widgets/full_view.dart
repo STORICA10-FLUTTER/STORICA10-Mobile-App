@@ -3,6 +3,7 @@ import 'package:storica/models/buku.dart';
 import 'package:storica/models/buku_kreasi.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:storica/variables.dart';
 
 class ViewBuku extends StatefulWidget {
   const ViewBuku({Key? key, required this.listparr}) : super(key: key);
@@ -51,7 +52,7 @@ class _ViewBukuState extends State<ViewBuku> {
   }
 
   Future<List<BukuKreasi>> fetchBukuKreasiKu() async {
-    var url = Uri.parse('http://localhost:8000/kreasiku-json/');
+    var url = Uri.parse('http://localhost:8000/kreasiku-json/$nama');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -100,22 +101,16 @@ class _ViewBukuState extends State<ViewBuku> {
 
   @override
   Widget build(BuildContext context) {
-    print(kriteria);
-    print("Buku Rating tertinggi" == "Buku Rating Tertinggi");
     Future<dynamic> dicoba = fetchBukuInggris();
 
     if (kriteria == "Buku Rating Tertinggi") {
-      print("masuk sini 1");
       dicoba = fetchBukuTop();
     } else if (kriteria == "Koleksi Kami") {
       dicoba = fetchBukuSemua();
-      print("masuk sini 2");
     } else if (kriteria == "Karya Pengguna") {
       dicoba = fetchBukuKreasi();
-      print("masuk sini 3");
     } else if (kriteria == "Karyaku") {
       dicoba = fetchBukuKreasi();
-      print("masuk sini 4");
     }
 
     return FutureBuilder(
@@ -151,9 +146,9 @@ class _ViewBukuState extends State<ViewBuku> {
                   iconTheme: const IconThemeData(
                       color: Color.fromARGB(255, 35, 34, 33)),
                 ),
-                body: const Center(
-                  child: Text("Jadi yang pertama menulis!",
-                      style: TextStyle(
+                body: Center(
+                  child: Text("$nama, mari menulis!",
+                      style: const TextStyle(
                           fontSize: 20,
                           fontFamily: 'Roboto',
                           fontWeight: FontWeight.bold,

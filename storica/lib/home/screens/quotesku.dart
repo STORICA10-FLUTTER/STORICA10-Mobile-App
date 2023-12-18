@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:storica/home/models/quotes.dart';
 import 'package:storica/home/widgets/detail.dart';
+import 'package:storica/variables.dart';
 
 class QuotesKuList extends StatefulWidget {
   const QuotesKuList({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class QuotesKuList extends StatefulWidget {
 
 class _QuotesKuListState extends State<QuotesKuList> {
   Future<List<Quotes>> fetchquotesku() async {
-    var url = Uri.parse('http://localhost:8000/myquotes-json/');
+    var url = Uri.parse('http://localhost:8000/myquotes-json/$nama');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -66,15 +67,15 @@ class _QuotesKuListState extends State<QuotesKuList> {
           if (snapshot.data == null) {
             return const Center(child: CircularProgressIndicator());
           } else {
-            if (!snapshot.hasData) {
-              return const Column(
-                children: [
-                  Text(
-                    "Belum ada quotes",
-                    style: TextStyle(color: Color(0xff59A5D8), fontSize: 20),
-                  ),
-                  SizedBox(height: 8),
-                ],
+            if (snapshot.data!.length == 0) {
+              return Center(
+                child: Text("$nama, mari menulis!",
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        decoration: TextDecoration.none)),
               );
             } else {
               return ListView.builder(
@@ -112,19 +113,19 @@ class _QuotesKuListState extends State<QuotesKuList> {
                         Icons.delete,
                         color: Color.fromARGB(200, 134, 104, 85),
                       ),
-                      onPressed: () {
-                        setState(() async {
-                          var url = Uri.parse(
-                              'http://localhost:8000/hapus-quote/${snapshot.data.pk}');
-                          await http.get(
-                            url,
-                            headers: {"Content-Type": "application/json"},
-                          );
-                          // ignore: use_build_context_synchronously
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content: Text("Quotes berhasi dihapus"),
-                          ));
+                      onPressed: () async {
+                        var url = Uri.parse(
+                            'http://localhost:8000/hapus-quote/${snapshot.data![index].pk}');
+                        await http.get(
+                          url,
+                          headers: {"Content-Type": "application/json"},
+                        );
+                        // ignore: use_build_context_synchronously
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Quotes berhasi dihapus"),
+                        ));
+                        setState(() {
                           fetchquotesku();
                         });
                       },

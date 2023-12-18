@@ -5,7 +5,8 @@ import 'package:storica/home/widgets/clips.dart';
 import 'package:storica/variables.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:storica/screens/login.dart';
+import 'package:storica/login.dart';
+import 'package:storica/home/widgets/full_view.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -25,7 +26,7 @@ class _ProfilPageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     if (gambarurl != "") {
-      profil = Image(image: NetworkImage(gambarurl));
+      profil = Image(image: NetworkImage(gambarurl), fit: BoxFit.fill);
     }
     double lebar = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -101,18 +102,23 @@ class _ProfilPageState extends State<ProfilePage> {
                                   radius: 90,
                                   backgroundColor:
                                       const Color.fromARGB(255, 159, 159, 159),
-                                  child: profil),
+                                  child: Align(
+                                      alignment: Alignment.center,
+                                      child: ClipOval(child: profil))),
                               const SizedBox(
                                 height: 15,
                               ),
                               ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
+                                onPressed: () async {
+                                  await Navigator.of(context).push(
                                     MaterialPageRoute(
+                                        maintainState: false,
                                         builder: (context) =>
                                             const UbahProfil()),
                                   );
+                                  setState(() {
+                                    gambarurl = gambarurl;
+                                  });
                                 },
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor:
@@ -215,8 +221,12 @@ class _ProfilPageState extends State<ProfilePage> {
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  // Add your button press logic here
-                  print("Karyaku");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            const ViewBuku(listparr: "Karyaku")),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
@@ -289,7 +299,7 @@ class _ProfilPageState extends State<ProfilePage> {
                     String uname = response["username"];
                     // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("$message Sampai jumpa, $uname."),
+                      content: Text("$message Sampai jumpa, $nama."),
                     ));
                     // ignore: use_build_context_synchronously
                     Navigator.pushReplacement(

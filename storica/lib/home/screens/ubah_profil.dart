@@ -108,6 +108,27 @@ class _UbahProfilState extends State<UbahProfil> {
                         String pesan = "";
                         if (await validateImage(_profil)) {
                           pesan = "Foto profilmu berhasil diperbarui!";
+                          final response = await request.postJson(
+                              'http://localhost:8000/ganti-profil/',
+                              jsonEncode(<String, String>{
+                                'gambar': _profil,
+                                'pengguna': nama
+                              }));
+                          if (response['status'] == 'success') {
+                            setState(() {
+                              gambarurl = response['gambar'];
+                              context;
+                            });
+                            // ignore: use_build_context_synchronously
+                            Navigator.pop(context);
+                          } else {
+                            // ignore: use_build_context_synchronously
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text(
+                                  "Terdapat kesalahan, silakan coba lagi."),
+                            ));
+                          }
                         } else {
                           pesan = "Maaf, link yang kamu masukkan tidak valid";
                         }
@@ -115,32 +136,6 @@ class _UbahProfilState extends State<UbahProfil> {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(pesan),
                         ));
-                      }
-                      if (_formKey.currentState!.validate()) {
-                        gambarurl = _profil;
-                        final response = await request.postJson(
-                            'http://localhost:8000/ganti-profil/',
-                            jsonEncode(<String, String>{'gambar': gambarurl}));
-                        if (response['status'] == 'success') {
-                          // ignore: use_build_context_synchronously
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content: Text("Profil baru berhasil disimpan!"),
-                          ));
-                          // ignore: use_build_context_synchronously
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ProfilePage()),
-                          );
-                        } else {
-                          // ignore: use_build_context_synchronously
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content:
-                                Text("Terdapat kesalahan, silakan coba lagi."),
-                          ));
-                        }
                       }
                     },
                     child: const Text(

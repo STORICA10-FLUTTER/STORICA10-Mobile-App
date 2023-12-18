@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'dart:convert';
 import 'package:storica/home/screens/write.dart';
+import 'package:storica/variables.dart';
 
 class TulisQuotes extends StatefulWidget {
   const TulisQuotes({super.key});
@@ -20,6 +20,7 @@ class _TulisQuotesState extends State<TulisQuotes> {
   Widget build(BuildContext context) {
     double lebar = MediaQuery.of(context).size.width;
     final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -120,11 +121,10 @@ class _TulisQuotesState extends State<TulisQuotes> {
                     ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        final response = await request.postJson(
+                        final response = await request.post(
                             'http://localhost:8000/create-quote/',
-                            jsonEncode(<String, String>{
-                              'kata_kata': _kata,
-                            }));
+                            {'kata_kata': _kata, 'username': nama});
+
                         if (response['status'] == 'success') {
                           // ignore: use_build_context_synchronously
                           ScaffoldMessenger.of(context)
@@ -132,10 +132,7 @@ class _TulisQuotesState extends State<TulisQuotes> {
                             content: Text("Quotesmu berhasil disimpan!"),
                           ));
                           // ignore: use_build_context_synchronously
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => Make()),
-                          );
+                          Navigator.pop(context);
                         } else {
                           // ignore: use_build_context_synchronously
                           ScaffoldMessenger.of(context)
