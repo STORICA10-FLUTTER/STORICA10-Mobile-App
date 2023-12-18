@@ -116,18 +116,63 @@ class _BukuTrendState extends State<BukuTrend> {
                                                         TextOverflow.ellipsis,
                                                     maxLines: 2,
                                                   ),
-                                                  const SizedBox(height: 10),
-                                                  Text(
-                                                    snapshot.data![i].fields
-                                                        .penulis,
-                                                    style: const TextStyle(
-                                                      fontSize: 16,
-                                                      fontFamily: 'Roboto',
-                                                      letterSpacing: 0.5,
-                                                    ),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: 2,
+                                                  const SizedBox(height: 20),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Text(
+                                                        "${snapshot.data![i].fields.penulis}",
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: const TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontFamily: 'Roboto',
+                                                          letterSpacing: 0,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.left),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 2.5,
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Text(
+                                                        "Nilai: ${snapshot.data![i].fields.rating}",
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: const TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontFamily: 'Roboto',
+                                                          letterSpacing: 0,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.left),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 2.5,
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Text(
+                                                        "Bahasa: ${snapshot.data![i].fields.bahasa}",
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: const TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontFamily: 'Roboto',
+                                                          letterSpacing: 0,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.left),
                                                   ),
                                                 ],
                                               ),

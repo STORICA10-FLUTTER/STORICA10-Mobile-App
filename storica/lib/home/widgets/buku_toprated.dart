@@ -13,7 +13,7 @@ class BukuRated extends StatefulWidget {
 
 class _BukuRatedState extends State<BukuRated> {
   Future<List<Buku>> fetchBukuKreasi() async {
-    var url = Uri.parse('http://localhost:8000/buku-json/');
+    var url = Uri.parse('http://localhost:8000/bukutop-json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -28,7 +28,6 @@ class _BukuRatedState extends State<BukuRated> {
         list_buku_kreasi.add(Buku.fromJson(d));
       }
     }
-    print(list_buku_kreasi.length);
     return list_buku_kreasi;
   }
 

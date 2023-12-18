@@ -37,7 +37,7 @@ class Buku {
 class Fields {
   String judul;
   int jumlahHalaman;
-  Bahasa bahasa;
+  String bahasa;
   String penulis;
   String penerbit;
   int jumlahReview;
@@ -62,7 +62,7 @@ class Fields {
   factory Fields.fromJson(Map<String, dynamic> json) => Fields(
         judul: json["judul"],
         jumlahHalaman: json["jumlah_halaman"],
-        bahasa: bahasaValues.map[json["bahasa"]]!,
+        bahasa: json["bahasa"],
         penulis: json["penulis"],
         penerbit: json["penerbit"],
         jumlahReview: json["jumlah_review"],
@@ -75,7 +75,7 @@ class Fields {
   Map<String, dynamic> toJson() => {
         "judul": judul,
         "jumlah_halaman": jumlahHalaman,
-        "bahasa": bahasaValues.reverse[bahasa],
+        "bahasa": bahasa,
         "penulis": penulis,
         "penerbit": penerbit,
         "jumlah_review": jumlahReview,
@@ -86,10 +86,6 @@ class Fields {
         "buku_favorites": List<dynamic>.from(bukuFavorites.map((x) => x)),
       };
 }
-
-enum Bahasa { ENG, EN_US }
-
-final bahasaValues = EnumValues({"eng": Bahasa.ENG, "en-US": Bahasa.EN_US});
 
 enum Model { MAIN_BUKU }
 

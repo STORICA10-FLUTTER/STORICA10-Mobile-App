@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:storica/screens/login.dart';
+import 'package:storica/screens/login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:storica/home/screens/menu.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
             useMaterial3: true,
           ),
-          home: const MyHomePage()),
+          home: const LoginPage()),
     );
   }
 }

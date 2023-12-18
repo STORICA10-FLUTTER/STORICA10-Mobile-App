@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:storica/models/buku.dart';
+import 'package:storica/models/buku_kreasi.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -12,8 +12,8 @@ class BukuKreasiList extends StatefulWidget {
 }
 
 class _BukuKreasiState extends State<BukuKreasiList> {
-  Future<List<Buku>> fetchBukuKreasi() async {
-    var url = Uri.parse('http://localhost:8000/buku-json/');
+  Future<List<BukuKreasi>> fetchBukuKreasi() async {
+    var url = Uri.parse('http://localhost:8000/bukukreasi-json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -22,10 +22,10 @@ class _BukuKreasiState extends State<BukuKreasiList> {
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
     // melakukan konversi data json menjadi object Product
-    List<Buku> list_buku_kreasi = [];
+    List<BukuKreasi> list_buku_kreasi = [];
     for (var d in data) {
       if (d != null) {
-        list_buku_kreasi.add(Buku.fromJson(d));
+        list_buku_kreasi.add(BukuKreasi.fromJson(d));
       }
     }
     print(list_buku_kreasi.length);
@@ -45,8 +45,14 @@ class _BukuKreasiState extends State<BukuKreasiList> {
               color: Colors.black,
             ));
           } else {
-            if (!snapshot.hasData) {
-              return const SizedBox(height: 0);
+            if (snapshot.data.length == 0) {
+              return const Center(
+                child: Text("Jadi yang pertama menulis!",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.bold)),
+              );
             } else {
               return SizedBox(
                 height: 192,

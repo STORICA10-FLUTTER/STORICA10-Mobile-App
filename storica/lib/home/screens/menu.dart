@@ -7,10 +7,11 @@ import 'package:storica/home/widgets/buku_kreasi.dart';
 import 'package:storica/home/widgets/buku_semua.dart';
 import 'package:storica/home/widgets/buku_inggris.dart';
 import 'package:storica/home/widgets/buku_toprated.dart';
-//import 'package:storica/variables.dart';
-import 'package:storica/bold_substring.dart';
+import 'package:storica/variables.dart';
+import 'package:storica/functions/bold_substring.dart';
 import 'package:storica/home/screens/write.dart';
 import 'package:storica/home/screens/profile_page.dart';
+import 'package:storica/home/widgets/full_view.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -128,7 +129,7 @@ class _HomePageState extends State<MyHomePage> {
                             const Align(
                               alignment: Alignment.topCenter,
                               child: Text(
-                                "Buku Tren",
+                                "Sedang Tren",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
@@ -145,8 +146,8 @@ class _HomePageState extends State<MyHomePage> {
                               alignment: Alignment.topLeft,
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 30),
-                                child: const Text(
-                                  "Hi username,\nselamat membaca!",
+                                child: Text(
+                                  "Hi $nama,\nselamat membaca!",
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ).boldSubString(
@@ -191,7 +192,13 @@ class _HomePageState extends State<MyHomePage> {
                     IconButton(
                       icon: const Icon(Icons.arrow_forward_ios_rounded),
                       onPressed: () {
-                        print('Button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ViewBuku(
+                                listparr: "Karya Pengguna",
+                              ),
+                            ));
                       },
                       color: const Color.fromARGB(255, 50, 45, 45),
                     ),
@@ -221,7 +228,13 @@ class _HomePageState extends State<MyHomePage> {
                     IconButton(
                       icon: const Icon(Icons.arrow_forward_ios_rounded),
                       onPressed: () {
-                        print('Button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ViewBuku(
+                                listparr: "Buku Berbahasa Inggris",
+                              ),
+                            ));
                       },
                       color: const Color.fromARGB(255, 50, 45, 45),
                     ),
@@ -240,7 +253,7 @@ class _HomePageState extends State<MyHomePage> {
                     const Align(
                       alignment: Alignment.bottomLeft,
                       child: Text(
-                        'Buku Rating tertinggi',
+                        'Buku Rating Tertinggi',
                         style: TextStyle(
                           color: Color.fromARGB(255, 50, 45, 45),
                           fontSize: 20,
@@ -251,7 +264,13 @@ class _HomePageState extends State<MyHomePage> {
                     IconButton(
                       icon: const Icon(Icons.arrow_forward_ios_rounded),
                       onPressed: () {
-                        print('Button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ViewBuku(
+                                listparr: "Buku Rating Tertinggi",
+                              ),
+                            ));
                       },
                       color: const Color.fromARGB(255, 50, 45, 45),
                     ),
@@ -270,7 +289,7 @@ class _HomePageState extends State<MyHomePage> {
                     const Align(
                       alignment: Alignment.bottomLeft,
                       child: Text(
-                        'Koleksi kami',
+                        'Koleksi Kami',
                         style: TextStyle(
                           color: Color.fromARGB(255, 50, 45, 45),
                           fontSize: 20,
@@ -281,7 +300,13 @@ class _HomePageState extends State<MyHomePage> {
                     IconButton(
                       icon: const Icon(Icons.arrow_forward_ios_rounded),
                       onPressed: () {
-                        print('Button pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ViewBuku(
+                                listparr: "Koleksi Kami",
+                              ),
+                            ));
                       },
                       color: const Color.fromARGB(255, 50, 45, 45),
                     ),
@@ -302,26 +327,28 @@ class _HomePageState extends State<MyHomePage> {
           ),
         ),
         Scaffold(
-            appBar: AppBar(
-          title: const Text(
-            'Storica',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 35, 34, 33),
+          appBar: AppBar(
+            title: const Text(
+              'Buku Favorit',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 35, 34, 33),
+              ),
             ),
-          ),
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(0.5),
-            child: Container(
-              color: Colors.grey,
-              height: 0.5,
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(0.5),
+              child: Container(
+                color: Colors.grey,
+                height: 0.5,
+              ),
             ),
+            backgroundColor: Colors.white,
+            elevation: 0,
+            iconTheme:
+                const IconThemeData(color: Color.fromARGB(255, 35, 34, 33)),
           ),
-          backgroundColor: Colors.white,
-          elevation: 0,
-          iconTheme: IconThemeData(color: Color.fromARGB(255, 35, 34, 33)),
-        )),
+        ),
         const ProfilePage(),
       ][currentPageIndex],
     );

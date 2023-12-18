@@ -28,7 +28,6 @@ class _BukuSemuaState extends State<BukuSemua> {
         list_buku_kreasi.add(Buku.fromJson(d));
       }
     }
-    print(list_buku_kreasi.length);
     return list_buku_kreasi;
   }
 

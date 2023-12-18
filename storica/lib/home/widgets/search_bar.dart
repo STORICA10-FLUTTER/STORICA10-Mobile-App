@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:storica/bold_substring.dart';
+import 'package:storica/functions/bold_substring.dart';
 import 'dart:convert';
 import 'package:storica/models/buku.dart';
 
