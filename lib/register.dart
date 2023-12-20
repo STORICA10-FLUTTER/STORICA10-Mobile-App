@@ -3,37 +3,38 @@ import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:storica/variables.dart';
-import 'package:storica/register.dart';
+import 'package:storica/login.dart';
 
 void main() {
-  runApp(const LoginApp());
+  runApp(const RegistApp());
 }
 
-class LoginApp extends StatelessWidget {
-  const LoginApp({super.key});
+class RegistApp extends StatelessWidget {
+  const RegistApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Masuk',
+      title: 'Registrasi',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      home: const RegistPage(),
     );
   }
 }
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegistPage extends StatefulWidget {
+  const RegistPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegistPageState createState() => _RegistPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegistPageState extends State<RegistPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Masuk'),
+        title: const Text('Registrasi'),
       ),
       body: Container(
         padding: const EdgeInsets.all(16.0),
@@ -64,19 +65,24 @@ class _LoginPageState extends State<LoginPage> {
               obscureText: true,
             ),
             const SizedBox(height: 12.0),
+            TextField(
+              controller: _confirmController,
+              decoration: const InputDecoration(
+                labelText: 'Konfirmasi password',
+              ),
+              obscureText: true,
+            ),
+            const SizedBox(height: 12.0),
             Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-              Text("Belum punya akun?"),
+              Text("Sudah punya akun?"),
               Align(
                 alignment: Alignment.topRight,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const RegistPage()));
+                    Navigator.pop(context);
                   },
                   child: Text(
-                    "Registrasi",
+                    "Masuk",
                     style: TextStyle(color: Colors.indigo[900]),
                   ),
                 ),
@@ -92,37 +98,34 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () async {
                   String username = _usernameController.text;
                   String password = _passwordController.text;
+                  String confirm = _confirmController.text;
 
                   // Cek kredensial
                   // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                   // Untuk menyambungkan Android emulator dengan Django pada localhost,
                   // gunakan URL http://10.0.2.2/
-                  final response = await request
-                      .login("https://storica.up.railway.app/auth/login/", {
+                  final response = await request.post(
+                      "https://storica.up.railway.app/auth/register/", {
                     'username': username,
                     'password': password,
+                    'confirm': confirm
                   });
 
-                  if (request.loggedIn) {
-                    String message = response['message'];
+                  if (response['status'] == 'success') {
                     String uname = response['username'];
-                    nama = uname;
-                    gambarurl = response['gambar'];
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyHomePage()),
-                    );
+                    Navigator.pop(context);
                     ScaffoldMessenger.of(context)
                       ..hideCurrentSnackBar()
                       ..showSnackBar(SnackBar(
-                          content: Text("$message Selamat datang, $uname.")));
+                          content: Text(
+                              "Selamat bergabung, $uname! Akunmu sudah terdaftar")));
                   } else {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
                         backgroundColor: Colors.white,
                         title: const Text(
-                          'Gagal Masuk',
+                          'Gagal Terdaftar',
                           style: TextStyle(
                               color: Color.fromARGB(255, 134, 104, 85)),
                         ),
@@ -146,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                   }
                 },
                 child: const Text(
-                  'Masuk',
+                  'Daftar',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
