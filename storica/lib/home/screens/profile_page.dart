@@ -292,7 +292,7 @@ class _ProfilPageState extends State<ProfilePage> {
               child: ElevatedButton(
                 onPressed: () async {
                   final response = await request
-                      .logout("http://localhost:8000/auth/logout/");
+                      .logout("https://storica.up.railway.app/auth/logout/");
                   String message = response["message"];
                   if (response['status']) {
                     String uname = response["username"];

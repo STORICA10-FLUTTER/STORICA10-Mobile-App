@@ -14,7 +14,7 @@ class QuotesList extends StatefulWidget {
 
 class _QuoteState extends State<QuotesList> {
   Future<List<Quotes>> fetchQuotes() async {
-    var url = Uri.parse('http://localhost:8000/quotes-json/');
+    var url = Uri.parse('https://storica.up.railway.app/quotes-json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},

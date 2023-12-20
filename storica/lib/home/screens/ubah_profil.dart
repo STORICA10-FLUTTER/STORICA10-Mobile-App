@@ -109,7 +109,7 @@ class _UbahProfilState extends State<UbahProfil> {
                         if (await validateImage(_profil)) {
                           pesan = "Foto profilmu berhasil diperbarui!";
                           final response = await request.postJson(
-                              'http://localhost:8000/ganti-profil/',
+                              'https://storica.up.railway.app/ganti-profil/',
                               jsonEncode(<String, String>{
                                 'gambar': _profil,
                                 'pengguna': nama

@@ -16,7 +16,7 @@ class CustomSearchBar extends StatefulWidget {
 class _CustomSearchState extends State<CustomSearchBar> {
   List<Buku> dicari = [];
   Future<List<Buku>> fetchBuku() async {
-    var url = Uri.parse('http://localhost:8000/buku-json/');
+    var url = Uri.parse('https://storica.up.railway.app/buku-json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
