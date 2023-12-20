@@ -13,7 +13,8 @@ class PreviewPage extends StatelessWidget {
       required this.gambar,
       required this.judul,
       required this.penerbit,
-      required this.isiBuku, required this.pk})
+      required this.isiBuku,
+      required this.pk})
       : super(key: key);
       
 

@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:storica/models/buku.dart';
 import 'dart:convert';
 
+import 'package:storica/modul-preview/preview.dart';
+
 class BukuTrend extends StatefulWidget {
   const BukuTrend({Key? key}) : super(key: key);
 
@@ -57,10 +59,21 @@ class _BukuTrendState extends State<BukuTrend> {
                             height: 300,
                             width: lebar,
                             child: GestureDetector(
-                              // ignore: avoid_print
-                              onTap: () =>
-                                  // ignore: avoid_print
-                                  print(snapshot.data![i].fields.judul),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PreviewPage(
+                                      gambar: snapshot.data![i].fields.gambar,
+                                      judul: snapshot.data![i].fields.judul,
+                                      penerbit:
+                                          snapshot.data![i].fields.penerbit,
+                                      pk: snapshot.data![i].pk,
+                                      isiBuku: snapshot.data![i].fields.isiBuku,
+                                    ),
+                                  ),
+                                );
+                              },
                               child: ClipRRect(
                                 child: Card(
                                   elevation: 0,

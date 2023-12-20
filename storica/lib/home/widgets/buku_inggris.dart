@@ -67,7 +67,20 @@ class _BukuInggrisState extends State<BukuInggris> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: GestureDetector(
-                      onTap: () => print(snapshot.data![index].fields.judul),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PreviewPage(
+                              gambar: snapshot.data![index].fields.gambar,
+                              judul: snapshot.data![index].fields.judul,
+                              penerbit: snapshot.data![index].fields.penerbit,
+                              pk: snapshot.data![index].pk,
+                              isiBuku: snapshot.data![index].fields.isiBuku,
+                            ),
+                          ),
+                        );
+                      },
                       child: SizedBox(
                         width: 120,
                         height: 192,
