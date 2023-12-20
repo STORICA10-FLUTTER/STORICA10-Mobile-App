@@ -15,7 +15,7 @@ class QuotesKuList extends StatefulWidget {
 
 class _QuotesKuListState extends State<QuotesKuList> {
   Future<List<Quotes>> fetchquotesku() async {
-    var url = Uri.parse('http://localhost:8000/myquotes-json/$nama');
+    var url = Uri.parse('https://storica.up.railway.app/myquotes-json/$nama');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -115,7 +115,7 @@ class _QuotesKuListState extends State<QuotesKuList> {
                       ),
                       onPressed: () async {
                         var url = Uri.parse(
-                            'http://localhost:8000/hapus-quote/${snapshot.data![index].pk}');
+                            'https://storica.up.railway.app/hapus-quote/${snapshot.data![index].pk}');
                         await http.get(
                           url,
                           headers: {"Content-Type": "application/json"},

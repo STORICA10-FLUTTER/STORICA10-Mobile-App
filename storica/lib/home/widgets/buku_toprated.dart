@@ -15,7 +15,7 @@ class BukuRated extends StatefulWidget {
 
 class _BukuRatedState extends State<BukuRated> {
   Future<List<Buku>> fetchBukuKreasi() async {
-    var url = Uri.parse('http://localhost:8000/bukutop-json/');
+    var url = Uri.parse('https://storica.up.railway.app/bukutop-json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},

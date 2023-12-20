@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:storica/home/screens/quotesku.dart';
 import 'package:storica/home/screens/ubah_profil.dart';
 import 'package:storica/home/widgets/clips.dart';
+import 'package:storica/modul-create-book-kreasi/karyaku.dart';
 import 'package:storica/variables.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -223,9 +224,7 @@ class _ProfilPageState extends State<ProfilePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const ViewBuku(listparr: "Karyaku")),
+                    MaterialPageRoute(builder: (context) => ShowKaryaku()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -293,7 +292,7 @@ class _ProfilPageState extends State<ProfilePage> {
               child: ElevatedButton(
                 onPressed: () async {
                   final response = await request
-                      .logout("http://localhost:8000/auth/logout/");
+                      .logout("https://storica.up.railway.app/auth/logout/");
                   String message = response["message"];
                   if (response['status']) {
                     String uname = response["username"];
