@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:storica/home/screens/quotesku.dart';
 import 'package:storica/home/screens/ubah_profil.dart';
 import 'package:storica/home/widgets/clips.dart';
+import 'package:storica/modul_favorites/favorites.dart';
 import 'package:storica/variables.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -189,8 +190,10 @@ class _ProfilPageState extends State<ProfilePage> {
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  // Add your button press logic here
-                  print("Buku Favorit");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FavoritesPage()), 
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,

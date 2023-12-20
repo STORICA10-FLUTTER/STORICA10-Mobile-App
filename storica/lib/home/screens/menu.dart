@@ -7,6 +7,7 @@ import 'package:storica/home/widgets/buku_kreasi.dart';
 import 'package:storica/home/widgets/buku_semua.dart';
 import 'package:storica/home/widgets/buku_inggris.dart';
 import 'package:storica/home/widgets/buku_toprated.dart';
+import 'package:storica/modul_favorites/favorites.dart';
 import 'package:storica/variables.dart';
 import 'package:storica/functions/bold_substring.dart';
 import 'package:storica/home/screens/write.dart';
@@ -331,14 +332,14 @@ class _HomePageState extends State<MyHomePage> {
         ),
         Scaffold(
           appBar: AppBar(
-            title: const Text(
-              'Buku Favorit',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 35, 34, 33),
-              ),
-            ),
+            // title: const Text(
+            //   'Buku Favorit',
+            //   style: TextStyle(
+            //     fontSize: 24,
+            //     fontWeight: FontWeight.bold,
+            //     color: Color.fromARGB(255, 35, 34, 33),
+            //   ),
+            // ),
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(0.5),
               child: Container(
@@ -351,6 +352,7 @@ class _HomePageState extends State<MyHomePage> {
             iconTheme:
                 const IconThemeData(color: Color.fromARGB(255, 35, 34, 33)),
           ),
+          body: FavoritesPage()
         ),
         const ProfilePage(),
       ][currentPageIndex],
