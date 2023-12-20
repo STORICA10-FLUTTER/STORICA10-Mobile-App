@@ -1,0 +1,2 @@
+String nama = "";
+String gambarurl = "";
