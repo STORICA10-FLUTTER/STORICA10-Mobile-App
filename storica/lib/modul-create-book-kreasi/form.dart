@@ -15,7 +15,29 @@ import 'package:http/http.dart' as http;
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class Item_Form extends StatefulWidget {
-  const Item_Form({super.key});
+  var judul = "";
+
+  var halaman = 0;
+
+  var bahasa = "";
+
+  var penerbit = "";
+
+  var penulis = "";
+
+  var imageData = "";
+
+  var dateData = "";
+
+  Item_Form(
+      {super.key,
+      required this.judul,
+      required this.halaman,
+      required this.bahasa,
+      required this.penerbit,
+      required this.penulis,
+      required this.dateData,
+      required this.imageData});
 
   @override
   State<Item_Form> createState() => _Item_FormState();
@@ -28,14 +50,16 @@ class _Item_FormState extends State<Item_Form> {
   TextEditingController fieldHalamanController = TextEditingController();
   TextEditingController fieldBahasaController = TextEditingController();
   TextEditingController fieldPenerbitController = TextEditingController();
+  TextEditingController fieldPenulisController = TextEditingController();
   TextEditingController fieldDateController = TextEditingController();
   TextEditingController fieldImageController = TextEditingController();
-  TextEditingController fieldJudulController = TextEditingController();
+  TextEditingController fieldJudulController = TextEditingController(text: "");
 
   var judul = null;
   int jumlahHalaman = 0;
   var bahasa = null;
   var penerbit = null;
+  var penulis = null;
   var waktuTerbit = null;
   var image = null;
   @override
@@ -49,7 +73,7 @@ class _Item_FormState extends State<Item_Form> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Form Daftar Item"),
+          title: Text("Form Daftar Buku Kreasi"),
         ),
         body: SingleChildScrollView(
             padding: EdgeInsets.all(10),
@@ -115,6 +139,10 @@ class _Item_FormState extends State<Item_Form> {
                       ),
                       Container(
                         margin: EdgeInsets.all(20),
+                        child: PenulisField(),
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(20),
                         child: ImageField(),
                       ),
                       Container(
@@ -158,8 +186,8 @@ class _Item_FormState extends State<Item_Form> {
                             jsonEncode(<String, String>{
                               "judul": fieldJudulController.text,
                               'penerbit': fieldPenerbitController.text,
-                              'jumlah_halaman':
-                                  fieldHalamanController.text.toString(),
+                              'penulis': fieldPenulisController.text,
+                              'jumlah_halaman': fieldHalamanController.text,
                               'bahasa': fieldBahasaController.text,
                               'tanggal_terbit': fieldDateController.text,
                               'gambar': fieldImageController.text,
@@ -274,7 +302,7 @@ class _Item_FormState extends State<Item_Form> {
         _formKey.currentState?.validate();
 
         setState(() {});
-        if (value != null && value != "") {
+        if (value != "") {
           bahasa = value!;
         }
         print("Deskrpsi : $bahasa");
@@ -341,6 +369,34 @@ class _Item_FormState extends State<Item_Form> {
         }
         setState(() {});
         print(fieldPenerbitController.text);
+      },
+    );
+  }
+
+  TextFormField PenulisField() {
+    return TextFormField(
+      controller: fieldPenulisController,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return "Penulis Tidak Boleh Anopnymous";
+        }
+      },
+      decoration: InputDecoration(
+          border: OutlineInputBorder(
+            // Menambahkan border ke TextFormField
+            borderRadius: BorderRadius.circular(8), // Mengatur sudut border
+            borderSide: BorderSide(color: Colors.grey), // Mengatur warna border
+          ),
+          hintText: "Penulis",
+          label: Text("Penulis")),
+      onChanged: (value) {
+        _formKey.currentState?.validate();
+
+        if (value != null && value != "") {
+          penerbit = value!;
+        }
+        setState(() {});
+        print(fieldPenulisController.text);
       },
     );
   }
