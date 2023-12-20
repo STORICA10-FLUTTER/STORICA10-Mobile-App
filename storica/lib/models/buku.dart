@@ -37,7 +37,7 @@ class Buku {
 class Fields {
   String judul;
   int jumlahHalaman;
-  Bahasa bahasa;
+  String bahasa;
   String penulis;
   String penerbit;
   int jumlahReview;
@@ -45,7 +45,6 @@ class Fields {
   String gambar;
   DateTime tanggalTerbit;
   List<int> bukuFavorites;
-  String isiBuku;
 
   Fields({
     required this.judul,
@@ -58,13 +57,12 @@ class Fields {
     required this.gambar,
     required this.tanggalTerbit,
     required this.bukuFavorites,
-    required this.isiBuku,
   });
 
   factory Fields.fromJson(Map<String, dynamic> json) => Fields(
         judul: json["judul"],
         jumlahHalaman: json["jumlah_halaman"],
-        bahasa: bahasaValues.map[json["bahasa"]]!,
+        bahasa: json["bahasa"],
         penulis: json["penulis"],
         penerbit: json["penerbit"],
         jumlahReview: json["jumlah_review"],
@@ -72,13 +70,12 @@ class Fields {
         gambar: json["gambar"],
         tanggalTerbit: DateTime.parse(json["tanggal_terbit"]),
         bukuFavorites: List<int>.from(json["buku_favorites"].map((x) => x)),
-        isiBuku: json["isi_buku"],
       );
 
   Map<String, dynamic> toJson() => {
         "judul": judul,
         "jumlah_halaman": jumlahHalaman,
-        "bahasa": bahasaValues.reverse[bahasa],
+        "bahasa": bahasa,
         "penulis": penulis,
         "penerbit": penerbit,
         "jumlah_review": jumlahReview,
@@ -87,13 +84,8 @@ class Fields {
         "tanggal_terbit":
             "${tanggalTerbit.year.toString().padLeft(4, '0')}-${tanggalTerbit.month.toString().padLeft(2, '0')}-${tanggalTerbit.day.toString().padLeft(2, '0')}",
         "buku_favorites": List<dynamic>.from(bukuFavorites.map((x) => x)),
-        "isi_buku": isiBuku,
       };
 }
-
-enum Bahasa { ENG, EN_US }
-
-final bahasaValues = EnumValues({"eng": Bahasa.ENG, "en-US": Bahasa.EN_US});
 
 enum Model { MAIN_BUKU }
 
