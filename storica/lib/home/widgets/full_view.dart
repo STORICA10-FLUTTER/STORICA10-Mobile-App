@@ -21,7 +21,7 @@ class _ViewBukuState extends State<ViewBuku> {
   final String kriteria;
 
   Future<List<Buku>> fetchBukuSemua() async {
-    var url = Uri.parse('http://localhost:8000/buku-json/');
+    var url = Uri.parse('https://storica.up.railway.app/buku-json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -37,7 +37,7 @@ class _ViewBukuState extends State<ViewBuku> {
   }
 
   Future<List<BukuKreasi>> fetchBukuKreasi() async {
-    var url = Uri.parse('http://localhost:8000/bukukreasi-json/');
+    var url = Uri.parse('https://storica.up.railway.app/bukukreasi-json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -53,7 +53,7 @@ class _ViewBukuState extends State<ViewBuku> {
   }
 
   Future<List<BukuKreasi>> fetchBukuKreasiKu() async {
-    var url = Uri.parse('http://localhost:8000/kreasiku-json/$nama');
+    var url = Uri.parse('https://storica.up.railway.app/kreasiku-json/$nama');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -69,7 +69,7 @@ class _ViewBukuState extends State<ViewBuku> {
   }
 
   Future<List<Buku>> fetchBukuTop() async {
-    var url = Uri.parse('http://localhost:8000/bukutop-json/');
+    var url = Uri.parse('https://storica.up.railway.app/bukutop-json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -85,7 +85,7 @@ class _ViewBukuState extends State<ViewBuku> {
   }
 
   Future<List<Buku>> fetchBukuInggris() async {
-    var url = Uri.parse('http://localhost:8000/bukubing-json/');
+    var url = Uri.parse('https://storica.up.railway.app/bukubing-json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},

@@ -23,7 +23,7 @@ class _ShowKaryakuState extends State<ShowKaryaku> {
 
   List<BukuKreasi> listKaryaku = [];
   Future<void> fetchKaryaku() async {
-    var url = Uri.parse("http://127.0.0.1:8000/bukukreasi-json/");
+    var url = Uri.parse("https://storica.up.railway.app/bukukreasi-json/");
     var response =
         await http.get(url, headers: {"Content-type": "application/json"});
     final List<dynamic> data = jsonDecode(utf8.decode(response.bodyBytes));

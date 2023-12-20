@@ -122,7 +122,7 @@ class _TulisQuotesState extends State<TulisQuotes> {
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         final response = await request.post(
-                            'http://localhost:8000/create-quote/',
+                            'https://storica.up.railway.app/create-quote/',
                             {'kata_kata': _kata, 'username': nama});
 
                         if (response['status'] == 'success') {
