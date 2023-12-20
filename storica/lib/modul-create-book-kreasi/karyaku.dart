@@ -49,22 +49,6 @@ class _ShowKaryakuState extends State<ShowKaryaku> {
                       title: Text(buku.fields.judul),
                       subtitle: Text("Penulis: ${buku.fields.penulis}"),
                       // Add more ListTile content based on your needs
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Item_Form(
-                                    judul: buku.fields.judul,
-                                    halaman: buku.fields.jumlahHalaman,
-                                    bahasa: buku.fields.bahasa,
-                                    penerbit: buku.fields.penerbit,
-                                    penulis: buku.fields.penulis,
-                                    dateData:
-                                        buku.fields.tanggalTerbit.toString(),
-                                    imageData: buku.fields.gambar,
-                                  )),
-                        );
-                      },
                     );
                   },
                 ),
