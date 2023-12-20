@@ -71,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                 // Untuk menyambungkan Android emulator dengan Django pada localhost,
                 // gunakan URL http://10.0.2.2/
                 final response = await request
-                    .login("https://storica.up.railway.app/login", {
+                    .login("https://storica.up.railway.app/auth/login/", {
                   'username': username,
                   'password': password,
                 });
