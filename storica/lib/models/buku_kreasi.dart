@@ -71,7 +71,7 @@ class Fields {
       jumlahHalaman:
           json["jumlah_halaman"] != null ? json["jumlah_halaman"] : 0,
       bahasa: json["bahasa"] != null ? json["bahasa"] : "",
-      penulis: json["penulis"] != null ? json["penulis"] : "",
+      penulis: json["penulis"] != null ? json["penulis"] : " ",
       penerbit: json["penerbit"] != null ? json["penerbit"] : "",
       jumlahReview: json["jumlah_review"] != null ? json["jumlah_review"] : 0,
       rating: json["rating"] != null ? json["rating"] : "",
