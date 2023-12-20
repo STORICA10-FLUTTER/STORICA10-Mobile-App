@@ -63,20 +63,24 @@ class Fields {
     required this.isiBuku,
   });
 
-  factory Fields.fromJson(Map<String, dynamic> json) => Fields(
-        user: json["user"],
-        judul: json["judul"],
-        jumlahHalaman: json["jumlah_halaman"],
-        bahasa: json["bahasa"],
-        penulis: json["penulis"],
-        penerbit: json["penerbit"],
-        jumlahReview: json["jumlah_review"],
-        rating: json["rating"],
-        gambar: json["gambar"],
-        tanggalTerbit: DateTime.parse(json["tanggal_terbit"]),
-        isPublished: json["is_published"],
-        isiBuku: json["isi_buku"],
-      );
+  factory Fields.fromJson(Map<String, dynamic> json) {
+    print(json["jumlah_review"]);
+    return Fields(
+      user: json["user"],
+      judul: json["judul"] != null ? json["judul"] : "",
+      jumlahHalaman:
+          json["jumlah_halaman"] != null ? json["jumlah_halaman"] : 0,
+      bahasa: json["bahasa"] != null ? json["bahasa"] : "",
+      penulis: json["penulis"] != null ? json["penulis"] : "",
+      penerbit: json["penerbit"] != null ? json["penerbit"] : "",
+      jumlahReview: json["jumlah_review"] != null ? json["jumlah_review"] : 0,
+      rating: json["rating"] != null ? json["rating"] : "",
+      gambar: json["gambar"] != null ? json["gambar"] : "",
+      tanggalTerbit: DateTime.parse(json["tanggal_terbit"]),
+      isPublished: json["is_published"],
+      isiBuku: json["isi_buku"] != null ? json["isi_buku"] : "",
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "user": user,
