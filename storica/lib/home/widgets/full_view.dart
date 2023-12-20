@@ -4,6 +4,7 @@ import 'package:storica/models/buku_kreasi.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:storica/variables.dart';
+import 'package:storica/modul-preview/preview.dart';
 
 class ViewBuku extends StatefulWidget {
   const ViewBuku({Key? key, required this.listparr}) : super(key: key);
@@ -189,7 +190,20 @@ class _ViewBukuState extends State<ViewBuku> {
                   snapshot.data!.length,
                   (index) {
                     return GestureDetector(
-                      onTap: () => print(snapshot.data![index].fields.judul),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PreviewPage(
+                              gambar: snapshot.data![index].fields.gambar,
+                              judul: snapshot.data![index].fields.judul,
+                              penerbit: snapshot.data![index].fields.penerbit,
+                              pk: snapshot.data![index].pk,
+                              isiBuku: snapshot.data![index].fields.isiBuku,
+                            ),
+                          ),
+                        );
+                      },
                       child: ClipRRect(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(20)),

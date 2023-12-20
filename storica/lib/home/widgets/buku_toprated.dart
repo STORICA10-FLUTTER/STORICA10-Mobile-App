@@ -3,6 +3,8 @@ import 'package:storica/models/buku.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:storica/modul-preview/preview-kreasi.dart';
+
 class BukuRated extends StatefulWidget {
   const BukuRated({Key? key}) : super(key: key);
 
@@ -65,7 +67,20 @@ class _BukuRatedState extends State<BukuRated> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: GestureDetector(
-                      onTap: () => print(snapshot.data![index].fields.judul),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PreviewPageKreasi(
+                              gambar: snapshot.data![index].fields.gambar,
+                              judul: snapshot.data![index].fields.judul,
+                              penerbit: snapshot.data![index].fields.penerbit,
+                              pk: snapshot.data![index].pk,
+                              isiBuku: snapshot.data![index].fields.isiBuku,
+                            ),
+                          ),
+                        );
+                      },
                       child: SizedBox(
                         width: 120,
                         height: 192,

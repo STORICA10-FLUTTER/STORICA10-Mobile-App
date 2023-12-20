@@ -45,6 +45,7 @@ class Fields {
   String gambar;
   DateTime tanggalTerbit;
   List<int> bukuFavorites;
+  String isiBuku = "Maaf, isi buku ini belum tersedia :(";
 
   Fields({
     required this.judul,

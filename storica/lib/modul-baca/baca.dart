@@ -15,7 +15,9 @@ class BacaPage extends StatelessWidget {
   final String judul;
 
   BacaPage(
-      {Key? key, required this.isiBuku, required this.pk, required this.judul})
+      {Key? key,
+      required this.isiBuku,
+      required this.pk, required this.judul})
       : super(key: key);
 
   Future<List<Komentar>> fetchKomentar() async {
