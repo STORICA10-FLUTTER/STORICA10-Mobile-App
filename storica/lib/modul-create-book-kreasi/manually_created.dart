@@ -60,13 +60,6 @@ class _ManualCreateState extends State<ManualCreate> {
           ),
           TextButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Item_Form();
-                }));
-              },
-              child: Text("BACK")),
-          TextButton(
-              onPressed: () {
                 final custom_snackBar = SnackBar(
                   content: const Text('Successfully Saved Changed'),
                   action: SnackBarAction(

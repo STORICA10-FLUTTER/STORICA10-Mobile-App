@@ -100,7 +100,15 @@ class Make extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return const Item_Form();
+                          return Item_Form(
+                            judul: '',
+                            halaman: 0,
+                            bahasa: '',
+                            penerbit: '',
+                            penulis: '',
+                            dateData: '',
+                            imageData: '',
+                          );
                         }));
                       },
                       style: ElevatedButton.styleFrom(
