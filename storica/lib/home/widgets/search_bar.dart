@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:storica/functions/bold_substring.dart';
 import 'dart:convert';
 import 'package:storica/models/buku.dart';
+import 'package:storica/modul-preview/preview.dart';
 
 class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({Key? key}) : super(key: key);
@@ -92,8 +93,19 @@ class _CustomSearchState extends State<CustomSearchBar> {
                       setState(
                         () {
                           controller.closeView('');
-                          print(item.fields.judul);
                         },
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PreviewPage(
+                            gambar: item.fields.gambar,
+                            judul: item.fields.judul,
+                            penerbit: item.fields.penerbit,
+                            pk: item.pk,
+                            isiBuku: item.fields.isiBuku,
+                          ),
+                        ),
                       );
                     },
                   );
