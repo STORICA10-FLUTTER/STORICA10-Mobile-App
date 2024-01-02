@@ -23,7 +23,7 @@ class BacaPage extends StatelessWidget {
   Future<List<Komentar>> fetchKomentar() async {
     try {
       var url =
-          Uri.parse('http://127.0.0.1:8000/preview/baca/json-komentar/$pk/');
+          Uri.parse('https://storica.up.railway.app/preview/baca/json-komentar/$pk/');
       var response =
           await http.get(url, headers: {"Content-Type": "application/json"});
 
@@ -44,7 +44,7 @@ class BacaPage extends StatelessWidget {
   
   Future<void> _submitComment(String isiKomentar, String rating) async {
     var url = Uri.parse(
-        'http://127.0.0.1:8000/preview/baca/create-komentar-flutter/'); // Replace with your API endpoint
+        'https://storica.up.railway.app/preview/baca/create-komentar-flutter/'); // Replace with your API endpoint
     var response = await http.post(
       url,
       headers: {"Content-Type": "application/json"},

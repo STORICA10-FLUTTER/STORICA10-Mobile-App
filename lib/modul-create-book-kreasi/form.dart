@@ -178,7 +178,7 @@ class _Item_FormState extends State<Item_Form> {
                           ShowPopup();
                         }
 
-                        var uri = ("http://127.0.0.1:8000/post-buku-kreasi");
+                        var uri = ("https://storica.up.railway.app/post-buku-kreasi");
 
                         // salahnya disini
                         var response = await request.postJson(
