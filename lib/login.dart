@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:storica/variables.dart';
+import 'package:storica/register.dart';
 
 void main() {
   runApp(const LoginApp());
@@ -14,7 +15,7 @@ class LoginApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Login',
+      title: 'Masuk',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -36,10 +37,12 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    double lebar = MediaQuery.of(context).size.width;
+
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Masuk'),
       ),
       body: Container(
         padding: const EdgeInsets.all(16.0),
@@ -60,55 +63,94 @@ class _LoginPageState extends State<LoginPage> {
               ),
               obscureText: true,
             ),
+            const SizedBox(height: 12.0),
+            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+              Text("Belum punya akun?"),
+              Align(
+                alignment: Alignment.topRight,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegistPage()));
+                  },
+                  child: Text(
+                    "Registrasi",
+                    style: TextStyle(color: Colors.indigo[900]),
+                  ),
+                ),
+              ),
+            ]),
             const SizedBox(height: 24.0),
-            ElevatedButton(
-              onPressed: () async {
-                String username = _usernameController.text;
-                String password = _passwordController.text;
+            SizedBox(
+              width: lebar * 0.94,
+              height: 40,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 134, 104, 85)),
+                onPressed: () async {
+                  String username = _usernameController.text;
+                  String password = _passwordController.text;
 
-                // Cek kredensial
-                // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-                // Untuk menyambungkan Android emulator dengan Django pada localhost,
-                // gunakan URL http://10.0.2.2/
-                final response = await request
-                    .login("https://storica.up.railway.app/auth/login/", {
-                  'username': username,
-                  'password': password,
-                });
+                  // Cek kredensial
+                  // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
+                  // Untuk menyambungkan Android emulator dengan Django pada localhost,
+                  // gunakan URL http://10.0.2.2/
+                  final response = await request
+                      .login("https://storica.up.railway.app/auth/login/", {
+                    'username': username,
+                    'password': password,
+                  });
 
-                if (request.loggedIn) {
-                  String message = response['message'];
-                  String uname = response['username'];
-                  nama = uname;
-                  gambarurl = response['gambar'];
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => MyHomePage()),
-                  );
-                  ScaffoldMessenger.of(context)
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(SnackBar(
-                        content: Text("$message Selamat datang, $uname.")));
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text('Login Gagal'),
-                      content: Text(response['message']),
-                      actions: [
-                        TextButton(
-                          child: const Text('OK'),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
+                  if (request.loggedIn) {
+                    String message = response['message'];
+                    String uname = response['username'];
+                    nama = uname;
+                    gambarurl = response['gambar'];
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyHomePage()),
+                    );
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(SnackBar(
+                          content: Text("$message Selamat datang, $uname.")));
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        backgroundColor: Colors.white,
+                        title: const Text(
+                          'Gagal Masuk',
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 134, 104, 85)),
                         ),
-                      ],
-                    ),
-                  );
-                }
-              },
-              child: const Text('Login'),
-            ),
+                        content: Text(response['message'],
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 134, 104, 85))),
+                        actions: [
+                          TextButton(
+                            child: const Text(
+                              'OK',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 134, 104, 85)),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                },
+                child: const Text(
+                  'Masuk',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ),
+            )
           ],
         ),
       ),
